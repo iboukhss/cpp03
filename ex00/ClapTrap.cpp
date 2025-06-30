@@ -20,9 +20,31 @@ ClapTrap::ClapTrap(const std::string& name)
     std::cout << "String constructor called\n";
 }
 
+ClapTrap::ClapTrap(const ClapTrap& other)
+    : name(other.name),
+      hitPoints(other.hitPoints),
+      energyPoints(other.energyPoints),
+      attackDamage(other.attackDamage)
+{
+    std::cout << "Copy constructor called\n";
+}
+
 ClapTrap::~ClapTrap()
 {
     std::cout << "Destructor called\n";
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& other)
+{
+    if (this == &other) {
+        return *this;
+    }
+
+    name = other.name;
+    hitPoints = other.hitPoints;
+    energyPoints = other.energyPoints;
+    attackDamage = other.attackDamage;
+    return *this;
 }
 
 bool ClapTrap::isAlive() const
@@ -52,7 +74,7 @@ void ClapTrap::attack(const std::string& target)
 void ClapTrap::takeDamage(int amount)
 {
     if (!isAlive()) {
-        std::cout << name << " is destroyed already!\n";
+        std::cout << name << " is destroyed and can't take any more damage!\n";
         return;
     }
 

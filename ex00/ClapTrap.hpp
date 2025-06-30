@@ -19,7 +19,7 @@ public:
     bool hasEnergy() const;
 
 private:
-    const std::string name;
+    std::string name;
     int hitPoints;
     int energyPoints;
     int attackDamage;

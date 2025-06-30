@@ -52,14 +52,10 @@ void ClapTrap::attack(const std::string& target)
 void ClapTrap::takeDamage(int amount)
 {
     if (!isAlive()) {
-        std::cout << name << " is destroyed and can't do anything!\n";
+        std::cout << name << " is destroyed already!\n";
         return;
     }
-    if (!hasEnergy()) {
-        std::cout << name << " has no energy left!\n";
-    }
 
-    energyPoints -= 1;
     int actualDamage = (amount > hitPoints) ? hitPoints : amount;
     hitPoints -= actualDamage;
     std::cout << name << " takes " << actualDamage << " points of damage!\n";

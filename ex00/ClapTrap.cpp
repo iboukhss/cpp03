@@ -17,7 +17,7 @@ ClapTrap::ClapTrap(const std::string& name)
       energyPoints(10),
       attackDamage(0)
 {
-    std::cout << "String constructor called " << name << "\n";
+    std::cout << "String constructor called for " << name << "\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)

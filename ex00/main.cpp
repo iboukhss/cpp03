@@ -12,7 +12,7 @@ static void testAttack()
     }
 
     // Should fail
-    bob.attack("John");
+    bob.attack("Alice");
 }
 
 static void testRepair()

@@ -8,7 +8,7 @@ ClapTrap::ClapTrap()
       energyPoints(10),
       attackDamage(0)
 {
-    std::cout << "Default constructor called for " << name << "\n";
+    std::cout << "ClapTrap '" << name << "' default constructor called\n";
 }
 
 ClapTrap::ClapTrap(const std::string& name)
@@ -17,7 +17,7 @@ ClapTrap::ClapTrap(const std::string& name)
       energyPoints(10),
       attackDamage(0)
 {
-    std::cout << "String constructor called for " << name << "\n";
+    std::cout << "ClapTrap '" << name << "' string constructor called\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
@@ -26,12 +26,12 @@ ClapTrap::ClapTrap(const ClapTrap& other)
       energyPoints(other.energyPoints),
       attackDamage(other.attackDamage)
 {
-    std::cout << "Copy constructor called for " << name << "\n";
+    std::cout << "ClapTrap '" << name << "' copy constructor called\n";
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "Destructor called for " << name << "\n";
+    std::cout << "ClapTrap '" << name << "' destructor called\n";
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
@@ -47,55 +47,44 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
     return *this;
 }
 
-bool ClapTrap::isAlive() const
-{
-    return (hitPoints > 0);
-}
-
-bool ClapTrap::hasEnergy() const
-{
-    return (energyPoints > 0);
-}
-
 void ClapTrap::attack(const std::string& target)
 {
-    if (!isAlive()) {
-        std::cout << name << " is destroyed and can't do anything!\n";
+    if (hitPoints <= 0) {
+        std::cout << name << " is destroyed and can't attack!\n";
         return;
     }
-    if (!hasEnergy()) {
-        std::cout << name << " has no energy left!\n";
+    if (energyPoints <= 0) {
+        std::cout << name << " has no energy left to attack!\n";
         return;
     }
-
     energyPoints -= 1;
     std::cout << name << " attacks " << target << " for " << attackDamage << " points of damage!\n";
 }
 
 void ClapTrap::takeDamage(int amount)
 {
-    if (!isAlive()) {
-        std::cout << name << " is destroyed and can't take any more damage!\n";
+    if (hitPoints <= 0) {
+        std::cout << name << " is destroyed already!\n";
         return;
     }
-
-    int actualDamage = (amount > hitPoints) ? hitPoints : amount;
-    hitPoints -= actualDamage;
-    std::cout << name << " takes " << actualDamage << " points of damage!\n";
+    hitPoints -= amount;
+    if (hitPoints < 0) {
+        hitPoints = 0;
+    }
+    std::cout << name << " takes " << amount << " points of damage!\n";
 }
 
 void ClapTrap::beRepaired(int amount)
 {
-    if (!isAlive()) {
-        std::cout << name << " is destroyed and can't do anything!\n";
+    if (hitPoints <= 0) {
+        std::cout << name << " is destroyed and can't repair itself!\n";
         return;
     }
-    if (!hasEnergy()) {
-        std::cout << name << " has no energy left!\n";
+    if (energyPoints <= 0) {
+        std::cout << name << " has no energy left to repair itself!\n";
         return;
     }
-
     energyPoints -= 1;
     hitPoints += amount;
-    std::cout << name << " is repaired for " << amount << " hit points.\n";
+    std::cout << name << " is repaired for " << amount << " hit points\n";
 }

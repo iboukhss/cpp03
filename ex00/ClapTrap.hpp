@@ -16,9 +16,6 @@ public:
     void takeDamage(int amount);
     void beRepaired(int amount);
 
-    bool isAlive() const;
-    bool hasEnergy() const;
-
 private:
     std::string name;
     int hitPoints;

@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+// Rule of four
 ClapTrap::ClapTrap()
     : name("ClapTrap"),
       hitPoints(10),
@@ -9,15 +10,6 @@ ClapTrap::ClapTrap()
       attackDamage(0)
 {
     std::cout << "ClapTrap '" << name << "' default constructor called\n";
-}
-
-ClapTrap::ClapTrap(const std::string& name)
-    : name(name),
-      hitPoints(10),
-      energyPoints(10),
-      attackDamage(0)
-{
-    std::cout << "ClapTrap '" << name << "' string constructor called\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
@@ -29,17 +21,11 @@ ClapTrap::ClapTrap(const ClapTrap& other)
     std::cout << "ClapTrap '" << name << "' copy constructor called\n";
 }
 
-ClapTrap::~ClapTrap()
-{
-    std::cout << "ClapTrap '" << name << "' destructor called\n";
-}
-
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
     if (this == &other) {
         return *this;
     }
-
     name = other.name;
     hitPoints = other.hitPoints;
     energyPoints = other.energyPoints;
@@ -47,6 +33,22 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
     return *this;
 }
 
+ClapTrap::~ClapTrap()
+{
+    std::cout << "ClapTrap '" << name << "' destructor called\n";
+}
+
+// Constructors
+ClapTrap::ClapTrap(const std::string& name)
+    : name(name),
+      hitPoints(10),
+      energyPoints(10),
+      attackDamage(0)
+{
+    std::cout << "ClapTrap '" << name << "' string constructor called\n";
+}
+
+// Public methods
 void ClapTrap::attack(const std::string& target)
 {
     if (hitPoints <= 0) {
